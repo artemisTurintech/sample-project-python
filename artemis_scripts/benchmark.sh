@@ -4,7 +4,7 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 source "$DIR/variables.sh"
 
-# Run benchmark, emit CSV, clean up raw JSON
+# Run benchmark via Python orchestrator (cross-platform RSS/CPU sampling).
+# Forwards all args to benchmark.py (e.g. --runs N, --output PATH).
 echo "Running benchmark"
-python -m poetry run pytest tests/ --benchmark-only --benchmark-json=artemis_raw.json && python -m poetry run python "$DIR/benchmark.py" > artemis_results.csv
-rm -f artemis_raw.json
+python -m poetry run python "$DIR/benchmark.py" "$@"
